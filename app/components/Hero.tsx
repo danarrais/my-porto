@@ -82,7 +82,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div variants={itemVariants} className="flex items-center gap-5 text-secondary">
-            <Link href="https://github.com/yasrtcha" target="_blank" className="hover:text-primary hover:scale-105 transition-all p-2 bg-surface rounded-full">
+            <Link href="https://github.com/danarrais" target="_blank" className="hover:text-primary hover:scale-105 transition-all p-2 bg-surface rounded-full">
               <span className="sr-only">GitHub</span>
               <FiGithub className="w-5 h-5" />
             </Link>

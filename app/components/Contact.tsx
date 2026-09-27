@@ -63,7 +63,7 @@ export default function Contact() {
                 <FiLinkedin className="w-6 h-6 text-primary" />
               </div>
             </a>
-            <a href="https://github.com/yasrtcha" aria-label="GitHub" target="_blank" rel="noopener noreferrer" className="flex items-center hover:scale-[1.1] transition-transform group">
+            <a href="https://github.com/danarrais" aria-label="GitHub" target="_blank" rel="noopener noreferrer" className="flex items-center hover:scale-[1.1] transition-transform group">
               <div className="p-4 bg-surface group-hover:bg-background rounded-full transition-colors shadow-sm">
                 <FiGithub className="w-6 h-6 text-primary" />
               </div>
