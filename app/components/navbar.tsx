@@ -129,7 +129,7 @@ export default function Navbar() {
 
 						{/* Download CV */}
 						<Link
-							href="/CV_Danar-Rais-Alhakim.pdf"
+							href="https://bit.ly/4iQsLOf"
 							target="_blank"
 							className="px-5 py-2.5 bg-primary text-background rounded-[14px] font-medium text-sm hover:-translate-y-0.5 hover:shadow-hover transition-all flex items-center gap-2"
 						>
@@ -203,7 +203,9 @@ export default function Navbar() {
 							</div>
 
 							<Link
-								href="/CV_Danar-Rais-Alhakim.pdf"
+								href="https://bit.ly/4iQsLOf"
+								target="_blank"
+								rel="noopener noreferrer"
 								onClick={() => setIsMobileMenuOpen(false)}
 								className="w-full py-4 bg-primary text-background rounded-xl font-medium text-center mt-4"
 							>
