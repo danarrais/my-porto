@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useSyncExternalStore } from 'react';
 
 export type Language = 'EN' | 'ID';
 
@@ -9,27 +9,34 @@ interface LanguageContextType {
   setLang: (lang: Language) => void;
 }
 
+const STORAGE_KEY = 'portfolio-lang';
+const CHANGE_EVENT = 'portfolio-lang-change';
+
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Language>('EN');
-  const [mounted, setMounted] = useState(false);
+function subscribe(callback: () => void) {
+  window.addEventListener('storage', callback);
+  window.addEventListener(CHANGE_EVENT, callback);
+  return () => {
+    window.removeEventListener('storage', callback);
+    window.removeEventListener(CHANGE_EVENT, callback);
+  };
+}
 
-  useEffect(() => {
-    setMounted(true);
-    const savedLang = localStorage.getItem('portfolio-lang') as Language;
-    if (savedLang && (savedLang === 'EN' || savedLang === 'ID')) {
-      setLangState(savedLang);
-    }
-  }, []);
+function getSnapshot(): Language {
+  return localStorage.getItem(STORAGE_KEY) === 'ID' ? 'ID' : 'EN';
+}
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const lang = useSyncExternalStore(subscribe, getSnapshot, () => 'EN' as Language);
 
   const setLang = (newLang: Language) => {
-    setLangState(newLang);
-    localStorage.setItem('portfolio-lang', newLang);
+    localStorage.setItem(STORAGE_KEY, newLang);
+    window.dispatchEvent(new Event(CHANGE_EVENT));
   };
 
   return (
-    <LanguageContext.Provider value={{ lang: mounted ? lang : 'EN', setLang }}>
+    <LanguageContext.Provider value={{ lang, setLang }}>
       {children}
     </LanguageContext.Provider>
   );

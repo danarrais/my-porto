@@ -38,13 +38,6 @@ const techLogosRow2 = [
   { node: <SiLaragon />, title: "Laragon", href: "https://laragon.net" }
 ];
 
-// Alternative with image sources
-const imageLogos = [
-  { src: "/logos/company1.png", alt: "Company 1", href: "https://company1.com" },
-  { src: "/logos/company2.png", alt: "Company 2", href: "https://company2.com" },
-  { src: "/logos/company3.png", alt: "Company 3", href: "https://company3.com" },
-];
-
 export default function About() {
   const { lang } = useLanguage();
   const t = dictionary[lang].about;
@@ -87,14 +80,14 @@ export default function About() {
                 firstContent={
                   <img
                     src="https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1786257457/profile_about_cy8exo.webp"
-                    alt="Batik Formal"
+                    alt="Danar Rais Alhakim in batik formal attire"
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 }
                 secondContent={
                   <img
                     src="https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1786257535/cat_it_g0znlh.webp"
-                    alt="default pixel transition content, a cat!"
+                    alt="Danar Rais Alhakim with his cat"
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 }

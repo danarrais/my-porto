@@ -11,16 +11,6 @@ export type RoleDetail = {
   tasks: TranslatableArray;
 };
 
-export type Feature = {
-  title: TranslatableString;
-  description: TranslatableString;
-};
-
-export type Challenge = {
-  challenge: TranslatableString;
-  solution: TranslatableString;
-};
-
 export type Project = {
   slug: string;
   title: string;
@@ -39,11 +29,7 @@ export type Project = {
   solution: TranslatableString;
   rolesDetails: RoleDetail[];
   techStack: TechStack[];
-  features: Feature[];
   gallery: string[];
-  challenges: Challenge[];
-  results: TranslatableArray;
-  tags: string[];
 };
 
 export const projects: Project[] = [
@@ -98,18 +84,7 @@ export const projects: Project[] = [
     techStack: [
       { category: 'Frontend', items: [{ name: 'Tailwind CSS', icon: 'tailwindcss' }] },
       { category: 'Backend', items: [{ name: 'Laravel', icon: 'laravel' }, { name: 'MySQL', icon: 'mysql' }] }
-    ],
-    features: [
-      {
-        title: { ID: 'Pencocokan Cerdas', EN: 'Smart Matching' },
-        description: { ID: 'Algoritma pencocokan proposal dengan preferensi perusahaan.', EN: 'Algorithm for matching proposals with company preferences.' }
-      },
-      {
-        title: { ID: 'Analitik Dashboard', EN: 'Dashboard Analytics' },
-        description: { ID: 'Statistik persebaran proposal dan metrik keberhasilan.', EN: 'Proposal distribution statistics and success metrics.' }
-      }
-    ],
-    gallery: [
+    ],    gallery: [
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785556192/login.jpg_yzim8z.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785556274/register_kfccom.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785556444/isi_profile_p4wu3u.png',
@@ -123,18 +98,7 @@ export const projects: Project[] = [
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785558231/status_pengajuan_iwqjsj.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785558232/tawaran_masuk_oceg0x.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785558231/rekap_pf271b.png'
-    ],
-    challenges: [
-      {
-        challenge: { ID: 'Performa pencarian proposal lambat saat data membesar.', EN: 'Proposal search performance was slow as data grew.' },
-        solution: { ID: 'Mengimplementasikan index database dan caching query utama.', EN: 'Implemented database indexing and caching for main queries.' }
-      }
-    ],
-    results: {
-      ID: ['Desain Responsif', 'Mode Gelap', 'Autentikasi', 'Dashboard Terintegrasi'],
-      EN: ['Responsive Design', 'Dark Mode', 'Authentication', 'Integrated Dashboard']
-    },
-    tags: ['Laravel', 'MySQL', 'Tailwind CSS']
+    ]
   },
   {
     slug: 'wellspace',
@@ -178,14 +142,7 @@ export const projects: Project[] = [
     ],
     techStack: [
       { category: 'Tools', items: [{ name: 'Flutter', icon: 'flutter' }, { name: 'Laravel', icon: 'laravel' }, { name: 'Dart', icon: 'dart' }, { name: 'MySql', icon: 'mysql' }] }
-    ],
-    features: [
-      {
-        title: { ID: 'Desain Pilar Konten', EN: 'Content Pillar Design' },
-        description: { ID: 'Kategorisasi konten untuk menjaga variasi feed.', EN: 'Content categorization to maintain feed variety.' }
-      }
-    ],
-    gallery: [
+    ],    gallery: [
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785588019/web_yil6bh.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785588018/qna_web_yaxizh.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785588018/kutipan_web_wyttk3.png',
@@ -198,18 +155,7 @@ export const projects: Project[] = [
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785829154/dasboard_pengguna_xl2afg.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785829156/kutipanmobile_jd3osc.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785829158/tanyamobile_qmfcln.png'
-    ],
-    challenges: [
-      {
-        challenge: { ID: 'Menjaga konsistensi posting di berbagai platform.', EN: 'Maintaining posting consistency across multiple platforms.' },
-        solution: { ID: 'Menggunakan tools scheduling otomatis terpusat.', EN: 'Utilized centralized automated scheduling tools.' }
-      }
-    ],
-    results: {
-      ID: ['Peningkatan engagement sebesar 40%', 'Konsistensi identitas brand', 'Jadwal konten yang terstruktur'],
-      EN: ['40% increase in engagement', 'Consistent brand identity', 'Structured content schedule']
-    },
-    tags: ['MySql', 'Content Design']
+    ]
   },
   {
     slug: 'water-level',
@@ -254,14 +200,7 @@ export const projects: Project[] = [
     ],
     techStack: [
       { category: 'Frontend', items: [{ name: 'Laravel', icon: 'laravel' }, { name: 'PHP', icon: 'php' }, { name: 'Tailwind CSS', icon: 'tailwindcss' }, { name: 'Arduino', icon: 'arduino' }, { name: 'MySQL', icon: 'mysql' }, {name: 'ESP32', icon: 'esp32' }] }
-    ],
-    features: [
-      {
-        title: { ID: 'Visualisasi Real-time', EN: 'Real-time Charting' },
-        description: { ID: 'Visualisasi data penjualan.', EN: 'Sales data visualization.' }
-      }
-    ],
-    gallery: [
+    ],    gallery: [
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785648406/dashboard_website_vyonr7.jpg',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785648019/maket_arw494.jpg',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785648408/maket_2_lgk3o5.png',
@@ -271,13 +210,7 @@ export const projects: Project[] = [
       'https://res.cloudinary.com/oyuxswwy/video/upload/f_auto,q_auto/v1785829643/vid1_mztdtz.mp4',
       'https://res.cloudinary.com/oyuxswwy/video/upload/f_auto,q_auto/v1785861140/vid2_lookqn.mp4',
       'https://res.cloudinary.com/oyuxswwy/video/upload/v1785862140/vid4_d72phq.mp4'
-    ],
-    challenges: [],
-    results: {
-      ID: ['Desain Responsif', 'Mode Gelap'],
-      EN: ['Responsive Design', 'Dark Mode']
-    },
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS']
+    ]
   },
   {
     slug: 'confest',
@@ -322,9 +255,7 @@ export const projects: Project[] = [
     ],
     techStack: [
       { category: 'Tools', items: [{ name: 'React', icon: 'react' }, { name: 'JavaScript', icon: 'javascript' }, { name: 'Tailwind CSS', icon: 'tailwindcss' }] }
-    ],
-    features: [],
-    gallery: [
+    ],    gallery: [
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785761881/timerr_neje9t.webp',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785761881/abouttheme_oz07px.webp',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785761881/aboutkpi_yxmkb1.webp',
@@ -333,13 +264,7 @@ export const projects: Project[] = [
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785761882/lomba1_tndzli.webp',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785761881/timeline_kolzcj.webp',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785761881/faq_tktflk.webp'
-    ],
-    challenges: [],
-    results: {
-      ID: ['Modernisasi desain', 'Desain responsif mobile'],
-      EN: ['Modernized design', 'Mobile responsive design']
-    },
-    tags: ['UI Audit', 'Information Architecture']
+    ]
   },
   {
     slug: 'cms-website',
@@ -390,9 +315,7 @@ export const projects: Project[] = [
     ],
     techStack: [
       { category: 'Tools', items: [{ name: 'Figma', icon: 'figma' }, { name: 'Next JS', icon: 'nextjs' }, { name: 'Prisma', icon: 'prisma' }, { name: 'TypeScript', icon: 'typescript' }, { name: 'Tailwind CSS', icon: 'tailwindcss' }] }
-    ],
-    features: [],
-    gallery: [
+    ],    gallery: [
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785768160/Desktop_-_1_ovtqfa.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785768285/Desktop_-_4_qs4tk2.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785768286/Desktop_-_5_nhgptp.png',
@@ -400,13 +323,7 @@ export const projects: Project[] = [
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785768288/Desktop_-_8_cgpy6q.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785768287/Desktop_-_7_bt10na.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785768287/Desktop_-_6_vppjnw.png'
-    ],
-    challenges: [],
-    results: {
-      ID: ['Konversi pemesanan lebih cepat'],
-      EN: ['Faster booking conversion']
-    },
-    tags: ['Product Discovery', 'Wireframing']
+    ]
   },
   {
     slug: 'rais-portfolio',
@@ -444,15 +361,7 @@ export const projects: Project[] = [
     ],
     techStack: [
       { category: 'Frontend', items: [{ name: 'Next JS', icon: 'nextjs' }, { name: 'TypeScript', icon: 'typescript' }, { name: 'Tailwind CSS', icon: 'tailwindcss' }, { name: 'Cloudinary', icon: 'cloudinary' }] }
-    ],
-    features: [],
-    gallery: [],
-    challenges: [],
-    results: {
-      ID: [''],
-      EN: ['']
-    },
-    tags: []
+    ],    gallery: []
   },
   {
     slug: 'feel-play',
@@ -489,9 +398,7 @@ export const projects: Project[] = [
     rolesDetails: [],
     techStack: [
       { category: 'Mobile', items: [{ name: 'Figma', icon: 'figma' }] }
-    ],
-    features: [],
-    gallery: [
+    ],    gallery: [
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785771806/Apple_iPhone_11_Pro_Silver_xvtzcg.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785827652/signup2_dtub1j.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785825640/sign_inn_usobpq.png',
@@ -509,12 +416,6 @@ export const projects: Project[] = [
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785827991/myplaylist_hijdor.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785827993/myplaylist2_jlpkt9.png',
       'https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1785827995/playlistsongplay_cyuz5h.png'
-    ],
-    challenges: [],
-    results: {
-      ID: ['Menghasilkan desain UI/UX aplikasi musik berbasis mood', 'Membuat pengalaman menemukan lagu lebih personal dan intuitif', 'Menghasilkan prototype sebagai acuan pengembangan aplikasi'],
-      EN: ['Generated mood-based music application UI/UX design', 'Created a more personal and intuitive song discovery experience', 'Produced a prototype as a reference for application development']
-    },
-    tags: ['UI/UX Design', 'Mobile App']
+    ]
   }
 ];

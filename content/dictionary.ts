@@ -54,8 +54,6 @@ export const dictionary = {
       myRole: "My Role",
       techStack: "Tech Stack",
       gallery: "Gallery",
-      challenges: "Challenges",
-      results: "Results",
       back: "← Back to All Projects"
     },
     contact: {
@@ -137,8 +135,6 @@ export const dictionary = {
       myRole: "Peran Saya",
       techStack: "Teknologi",
       gallery: "Galeri",
-      challenges: "Tantangan",
-      results: "Hasil",
       back: "← Kembali ke Semua Proyek"
     },
     contact: {

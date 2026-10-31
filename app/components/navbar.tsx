@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
@@ -9,16 +9,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { dictionary } from '@/content/dictionary';
 
+const emptySubscribe = () => () => {};
+
 export default function Navbar() {
 	const pathname = usePathname();
 	const { theme, setTheme } = useTheme();
 	const { lang, setLang } = useLanguage();
-	const [mounted, setMounted] = useState(false);
+	const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 	const [scrolled, setScrolled] = useState(false);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	useEffect(() => {
-		setMounted(true);
 		const handleScroll = () => setScrolled(window.scrollY > 20);
 		handleScroll();
 		window.addEventListener('scroll', handleScroll, { passive: true });
@@ -132,6 +133,7 @@ export default function Navbar() {
 						<Link
 							href="https://bit.ly/4iQsLOf"
 							target="_blank"
+							rel="noopener noreferrer"
 							className="px-5 py-2.5 bg-primary text-background rounded-[14px] font-medium text-sm hover:-translate-y-0.5 hover:shadow-hover transition-all flex items-center gap-2"
 						>
 							{t.downloadCv}

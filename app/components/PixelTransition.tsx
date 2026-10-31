@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState, CSSProperties } from 'react';
+import React, { useRef, useEffect, useState, useSyncExternalStore, CSSProperties } from 'react';
 import { gsap } from 'gsap';
 
 interface PixelTransitionProps {
@@ -14,6 +14,10 @@ interface PixelTransitionProps {
   style?: CSSProperties;
   aspectRatio?: string;
 }
+
+const emptySubscribe = () => () => {};
+const getIsTouchDevice = () =>
+  'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
 
 const PixelTransition: React.FC<PixelTransitionProps> = ({
   firstContent,
@@ -32,13 +36,7 @@ const PixelTransition: React.FC<PixelTransitionProps> = ({
   const delayedCallRef = useRef<gsap.core.Tween | null>(null);
 
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [isTouchDevice, setIsTouchDevice] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsTouchDevice(
-      'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches
-    );
-  }, []);
+  const isTouchDevice = useSyncExternalStore(emptySubscribe, getIsTouchDevice, () => false);
 
   useEffect(() => {
     const pixelGridEl = pixelGridRef.current;

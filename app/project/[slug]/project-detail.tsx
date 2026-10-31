@@ -11,7 +11,6 @@ import Lightbox from "@/app/components/Lightbox";
 import TechStackIcon from "@/app/components/TechStackIcon";
 import { useLanguage } from '../../context/LanguageContext';
 import { dictionary } from '@/content/dictionary';
-import { CldImage } from 'next-cloudinary';
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -128,7 +127,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                 {project.demoUrl && (
                   <Link
                     href={project.demoUrl}
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                     className="px-5 py-2.5 bg-accent text-background rounded-[14px] text-sm font-medium hover:-translate-y-0.5 hover:shadow-hover transition-all flex items-center gap-2"
                   >
                     {t.liveDemo} <ArrowUpRight className="w-4 h-4" />
@@ -137,7 +136,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                 {project.githubUrl && (
                   <Link
                     href={project.githubUrl}
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                     className="px-5 py-2.5 bg-surface border border-border text-primary rounded-[14px] text-sm font-medium hover:bg-background transition-all flex items-center gap-2"
                   >
                     <FiGithub className="w-4 h-4" /> {t.github}
@@ -146,7 +145,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                 {project.figmaUrl && (
                   <Link
                     href={project.figmaUrl}
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                     className="px-5 py-2.5 bg-surface border border-border text-primary rounded-[14px] text-sm font-medium hover:bg-background transition-all flex items-center gap-2"
                   >
                     <SiFigma className="w-4 h-4" /> Figma
@@ -344,18 +343,10 @@ export default function ProjectDetail({ project }: { project: Project }) {
                 controls
                 autoPlay
               />
-            ) : selectedPopupImage.includes('/') || selectedPopupImage.includes('http') ? (
+            ) : (
               <img
                 src={selectedPopupImage}
                 alt={project.title}
-                className="w-full h-full object-contain"
-              />
-            ) : (
-              <CldImage
-                src={selectedPopupImage}
-                alt={project.title}
-                width={1920}
-                height={1080}
                 className="w-full h-full object-contain"
               />
             )}

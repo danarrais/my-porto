@@ -74,7 +74,7 @@ export default function Hero() {
             </Link>
             <Link
               href="https://bit.ly/4iQsLOf"
-              target="_blank"
+              target="_blank" rel="noopener noreferrer"
               className="px-7 py-4 bg-transparent border border-primary text-primary rounded-[14px] font-medium hover:bg-surface transition-colors"
             >
               {t.downloadCv}
@@ -82,15 +82,15 @@ export default function Hero() {
           </motion.div>
 
           <motion.div variants={itemVariants} className="flex items-center gap-5 text-secondary">
-            <Link href="https://github.com/danarrais" target="_blank" className="hover:text-primary hover:scale-105 transition-all p-2 bg-surface rounded-full">
+            <Link href="https://github.com/danarrais" target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:scale-105 transition-all p-2 bg-surface rounded-full">
               <span className="sr-only">GitHub</span>
               <FiGithub className="w-5 h-5" />
             </Link>
-            <Link href="https://www.linkedin.com/in/danar-rais-alhakim/" target="_blank" className="hover:text-primary hover:scale-105 transition-all p-2 bg-surface rounded-full">
+            <Link href="https://www.linkedin.com/in/danar-rais-alhakim/" target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:scale-105 transition-all p-2 bg-surface rounded-full">
               <span className="sr-only">LinkedIn</span>
               <FiLinkedin className="w-5 h-5" />
             </Link>
-            <Link href="https://instagram.com/danarraisal" target="_blank" className="hover:text-primary hover:scale-105 transition-all p-2 bg-surface rounded-full">
+            <Link href="https://instagram.com/danarraisal" target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:scale-105 transition-all p-2 bg-surface rounded-full">
               <span className="sr-only">Instagram</span>
               <FiInstagram className="w-5 h-5" />
             </Link>
@@ -108,7 +108,7 @@ export default function Hero() {
               firstContent={
                 <img
                   src="https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto,w_600/v1786257592/profile_kslxuv.webp"
-                  alt="Default pixel transition content, its me!"
+                  alt="Danar Rais Alhakim"
                   fetchPriority="high"
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
@@ -116,7 +116,7 @@ export default function Hero() {
               secondContent={
                 <img
                   src="https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto,w_600/v1786257535/cat_it_g0znlh.webp"
-                  alt="default pixel transition content, a cat!"
+                  alt="Danar Rais Alhakim with his cat"
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               }
