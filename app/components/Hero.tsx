@@ -73,7 +73,7 @@ export default function Hero() {
               {t.viewProjects}
             </Link>
             <Link
-              href="/CV_Danar-Rais-Alhakim.pdf"
+              href="https://bit.ly/4iQsLOf"
               target="_blank"
               className="px-7 py-4 bg-transparent border border-primary text-primary rounded-[14px] font-medium hover:bg-surface transition-colors"
             >
