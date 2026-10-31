@@ -2,7 +2,7 @@
 
 import * as Icons from 'simple-icons';
 
-const iconMap: Record<string, { svg: string }> = {
+const iconMap: Record<string, { svg: string; hex: string }> = {
   'nextdotjs': Icons.siNextdotjs,
   'tailwindcss': Icons.siTailwindcss,
   'laravel': Icons.siLaravel,
@@ -32,9 +32,9 @@ interface TechStackIconProps {
 
 export default function TechStackIcon({ name, icon }: TechStackIconProps) {
   const IconComponent = iconMap[icon];
+  const color = IconComponent?.hex ? `#${IconComponent.hex}` : '#000';
 
-  // Monochrome: follow the surrounding text color instead of brand hex
-  const coloredSvg = IconComponent?.svg.replace(/<path/g, '<path fill="currentColor"');
+  const coloredSvg = IconComponent?.svg.replace(/<path/g, `<path fill="${color}"`);
 
   return (
     <span className="px-4 py-2 bg-surface rounded-full text-sm font-medium text-primary hover:bg-border transition-colors cursor-default border border-transparent flex items-center gap-2">
