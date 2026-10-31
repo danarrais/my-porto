@@ -3,9 +3,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ChevronDown, X } from "lucide-react";
-import { useLanguage } from '../context/LanguageContext';
+import { ChevronDown } from "lucide-react";
+import { useLanguage, type Language } from '../context/LanguageContext';
 import { dictionary } from '@/content/dictionary';
+import Lightbox from './Lightbox';
+
+type AboutDict = (typeof dictionary)["EN"]["about"];
 
 interface Certificate {
   id: string;
@@ -56,30 +59,36 @@ interface AccordionItemProps {
   isOpen: boolean;
   onClick: () => void;
   onImageClick: (image: string) => void;
-  t: any;
-  lang: "EN" | "ID";
+  t: AboutDict;
+  lang: Language;
 }
 
 const AccordionItem = ({ cert, isOpen, onClick, onImageClick, t, lang }: AccordionItemProps) => {
   return (
     <div className="border-t border-border">
-      <button
-        onClick={onClick}
-        className="w-full flex items-center justify-between py-4 px-0 hover:bg-transparent transition-colors"
-      >
-        <h3 className="text-lg font-medium text-primary text-left">{cert.title}</h3>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="flex-shrink-0"
+      <h3 className="text-lg font-medium text-primary">
+        <button
+          type="button"
+          onClick={onClick}
+          aria-expanded={isOpen}
+          aria-controls={`${cert.id}-panel`}
+          className="w-full flex items-center justify-between gap-4 py-4 text-left"
         >
-          <ChevronDown className="w-5 h-5 text-secondary" />
-        </motion.div>
-      </button>
+          <span>{cert.title}</span>
+          <motion.span
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
+            className="flex-shrink-0"
+          >
+            <ChevronDown className="w-5 h-5 text-secondary" />
+          </motion.span>
+        </button>
+      </h3>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id={`${cert.id}-panel`}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -87,9 +96,11 @@ const AccordionItem = ({ cert, isOpen, onClick, onImageClick, t, lang }: Accordi
             className="overflow-hidden"
           >
             <div className="pb-4 flex flex-col gap-4">
-              <div 
-                className="relative w-2/5 aspect-[3/2] bg-transparent cursor-pointer hover:opacity-80 transition-opacity"
+              <button
+                type="button"
                 onClick={() => cert.image && onImageClick(cert.image)}
+                aria-label={`Open certificate ${cert.title}`}
+                className="relative block w-2/5 aspect-[3/2] bg-transparent cursor-pointer hover:opacity-80 transition-opacity"
               >
                 {cert.image ? (
                   <Image
@@ -100,11 +111,11 @@ const AccordionItem = ({ cert, isOpen, onClick, onImageClick, t, lang }: Accordi
                     className="object-contain"
                   />
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center text-muted font-mono text-sm">
+                  <span className="absolute inset-0 flex items-center justify-center text-muted font-mono text-sm">
                     No Image
-                  </div>
+                  </span>
                 )}
-              </div>
+              </button>
               <div className="flex flex-col gap-2 text-left">
                 <p className="text-sm text-secondary">
                   <span className="font-medium">{t.issuedBy}</span> {cert.issuer[lang]}
@@ -148,7 +159,7 @@ export default function Certificates() {
                 onClick={() => setOpenId(openId === cert.id ? null : cert.id)}
                 onImageClick={setSelectedImage}
                 t={t}
-                lang={lang as "EN" | "ID"}
+                lang={lang}
               />
               {index === certificates.length - 1 && (
                 <div className="border-b border-border"></div>
@@ -158,41 +169,23 @@ export default function Certificates() {
         </div>
       </div>
 
-      <AnimatePresence>
+      <Lightbox
+        open={selectedImage !== null}
+        onClose={() => setSelectedImage(null)}
+        label={certificates.find((c) => c.image === selectedImage)?.title ?? t.certificates}
+      >
         {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedImage(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-          >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-4xl aspect-[3/2] max-h-[90vh]"
-            >
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="absolute -top-12 right-0 p-2 text-white/70 hover:text-white transition-colors"
-              >
-                <X className="w-8 h-8" />
-              </button>
-              <div className="relative w-full h-full">
-                <Image
-                  src={selectedImage}
-                  alt="Certificate"
-                  fill
-                  unoptimized
-                  className="object-contain"
-                />
-              </div>
-            </motion.div>
-          </motion.div>
+          <div className="relative w-full max-w-4xl aspect-[3/2] max-h-[90vh]">
+            <Image
+              src={selectedImage}
+              alt={certificates.find((c) => c.image === selectedImage)?.title ?? 'Certificate'}
+              fill
+              unoptimized
+              className="object-contain"
+            />
+          </div>
         )}
-      </AnimatePresence>
+      </Lightbox>
     </section>
   );
 }

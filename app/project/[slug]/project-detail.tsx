@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight, Lock, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, Lock } from "lucide-react";
 import { FiGithub } from "react-icons/fi";
 import { SiFigma } from "react-icons/si";
 import type { Project } from "@/content/projects";
 import Navbar from "@/app/components/navbar";
+import Lightbox from "@/app/components/Lightbox";
 import TechStackIcon from "@/app/components/TechStackIcon";
 import { useLanguage } from '../../context/LanguageContext';
 import { dictionary } from '@/content/dictionary';
@@ -59,15 +60,13 @@ export default function ProjectDetail({ project }: { project: Project }) {
   const currentGalleryIndex = isGalleryImage ? project.gallery.indexOf(selectedPopupImage as string) : -1;
   const totalGalleryImages = project.gallery.length;
 
-  const handlePrevImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const showPrev = () => {
     if (currentGalleryIndex > 0) {
       setSelectedPopupImage(project.gallery[currentGalleryIndex - 1]);
     }
   };
 
-  const handleNextImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const showNext = () => {
     if (currentGalleryIndex !== -1 && currentGalleryIndex < totalGalleryImages - 1) {
       setSelectedPopupImage(project.gallery[currentGalleryIndex + 1]);
     }
@@ -288,10 +287,12 @@ export default function ProjectDetail({ project }: { project: Project }) {
 
                 <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
                   {project.gallery.map((img, i) => (
-                    <div
+                    <button
                       key={i}
+                      type="button"
                       onClick={() => img && setSelectedPopupImage(img)}
-                      className="relative rounded-[24px] overflow-hidden cursor-pointer hover:opacity-95 hover:scale-[0.98] transition-all duration-300 border border-border break-inside-avoid mb-6"
+                      aria-label={`Open gallery ${i + 1}`}
+                      className="block w-full text-left relative rounded-[24px] overflow-hidden cursor-pointer hover:opacity-95 hover:scale-[0.98] transition-all duration-300 border border-border break-inside-avoid mb-6"
                     >
                       {img ? (
                         img.includes('/video/') || img.endsWith('.mp4') ? (
@@ -315,7 +316,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                           {img}
                         </div>
                       )}
-                    </div>
+                    </button>
                   ))}
                 </div>
               </motion.section>
@@ -325,85 +326,42 @@ export default function ProjectDetail({ project }: { project: Project }) {
         </div>
       </main>
 
-      <AnimatePresence>
+      <Lightbox
+        open={selectedPopupImage !== null}
+        onClose={() => setSelectedPopupImage(null)}
+        label={t.gallery}
+        index={currentGalleryIndex !== -1 ? currentGalleryIndex + 1 : undefined}
+        total={currentGalleryIndex !== -1 ? totalGalleryImages : undefined}
+        onPrev={currentGalleryIndex > 0 ? showPrev : undefined}
+        onNext={currentGalleryIndex !== -1 && currentGalleryIndex < totalGalleryImages - 1 ? showNext : undefined}
+      >
         {selectedPopupImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedPopupImage(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-12 bg-black/80 backdrop-blur-sm"
-          >
-            {/* Close Button */}
-            <button
-              onClick={(e) => { e.stopPropagation(); setSelectedPopupImage(null); }}
-              className="absolute top-4 right-4 md:top-8 md:right-8 p-2 text-white/70 hover:text-white transition-colors z-50"
-            >
-              <X className="w-8 h-8 md:w-10 md:h-10" />
-            </button>
-
-            {/* Image Counter */}
-            {currentGalleryIndex !== -1 && (
-              <div className="absolute top-4 md:top-8 left-1/2 -translate-x-1/2 p-2 text-white/90 font-medium tracking-widest text-sm md:text-base z-50">
-                {currentGalleryIndex + 1} / {totalGalleryImages}
-              </div>
+          <div className="relative w-full max-w-5xl aspect-video max-h-[90vh] flex items-center justify-center">
+            {selectedPopupImage.includes('/video/') || selectedPopupImage.endsWith('.mp4') ? (
+              <video
+                src={selectedPopupImage}
+                className="w-full h-full object-contain"
+                controls
+                autoPlay
+              />
+            ) : selectedPopupImage.includes('/') || selectedPopupImage.includes('http') ? (
+              <img
+                src={selectedPopupImage}
+                alt={project.title}
+                className="w-full h-full object-contain"
+              />
+            ) : (
+              <CldImage
+                src={selectedPopupImage}
+                alt={project.title}
+                width={1920}
+                height={1080}
+                className="w-full h-full object-contain"
+              />
             )}
-
-            {/* Prev Button */}
-            {currentGalleryIndex > 0 && (
-              <button
-                onClick={handlePrevImage}
-                className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white transition-all hover:-translate-x-1 z-50"
-              >
-                <ChevronLeft className="w-8 h-8 md:w-12 md:h-12 drop-shadow-md" />
-              </button>
-            )}
-
-            {/* Next Button */}
-            {currentGalleryIndex !== -1 && currentGalleryIndex < totalGalleryImages - 1 && (
-              <button
-                onClick={handleNextImage}
-                className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white transition-all hover:translate-x-1 z-50"
-              >
-                <ChevronRight className="w-8 h-8 md:w-12 md:h-12 drop-shadow-md" />
-              </button>
-            )}
-
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-5xl aspect-video max-h-[90vh]"
-            >
-              <div className="relative w-full h-full flex items-center justify-center">
-                {selectedPopupImage.includes('/video/') || selectedPopupImage.endsWith('.mp4') ? (
-                  <video
-                    src={selectedPopupImage}
-                    className="w-full h-full object-contain"
-                    controls
-                    autoPlay
-                  />
-                ) : selectedPopupImage.includes('/') || selectedPopupImage.includes('http') ? (
-                  <img
-                    src={selectedPopupImage}
-                    alt="Full View"
-                    className="w-full h-full object-contain"
-                  />
-                ) : (
-                  <CldImage
-                    src={selectedPopupImage}
-                    alt="Full View"
-                    width={1920}
-                    height={1080}
-                    className="w-full h-full object-contain"
-                  />
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      </Lightbox>
     </>
   );
 }
