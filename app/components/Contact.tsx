@@ -53,7 +53,7 @@ export default function Contact() {
                 <Mail className="w-6 h-6 text-primary" />
               </div>
             </a>
-            <a href="https://wa.me/085747784405" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer" className="flex items-center hover:scale-[1.1] transition-transform group">
+            <a href="https://wa.me/6285747784405" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer" className="flex items-center hover:scale-[1.1] transition-transform group">
               <div className="p-4 bg-surface group-hover:bg-background rounded-full transition-colors shadow-sm">
                 <FaWhatsapp className="w-6 h-6 text-primary" />
               </div>

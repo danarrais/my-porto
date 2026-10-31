@@ -19,21 +19,22 @@ export default function Navbar() {
 
 	useEffect(() => {
 		setMounted(true);
-		const handleScroll = () => {
-			setScrolled(window.scrollY > 20);
-		};
-		window.addEventListener('scroll', handleScroll);
+		const handleScroll = () => setScrolled(window.scrollY > 20);
+		handleScroll();
+		window.addEventListener('scroll', handleScroll, { passive: true });
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
 	useEffect(() => {
-		if (isMobileMenuOpen) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = '';
-		}
+		if (!isMobileMenuOpen) return;
+		document.body.style.overflow = 'hidden';
+		const handleKey = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') setIsMobileMenuOpen(false);
+		};
+		window.addEventListener('keydown', handleKey);
 		return () => {
 			document.body.style.overflow = '';
+			window.removeEventListener('keydown', handleKey);
 		};
 	}, [isMobileMenuOpen]);
 
@@ -63,7 +64,7 @@ export default function Navbar() {
 				<div className="hidden md:flex items-center space-x-8">
 					<div className="flex items-center space-x-6 text-sm font-medium text-secondary">
 						{navLinks.map((link) => {
-							const isActive = pathname === link.href || (pathname.startsWith('/project') && link.name === 'Projects');
+							const isActive = pathname === link.href || (link.href === '/project' && pathname.startsWith('/project'));
 							return (
 								<Link
 									key={link.name}
@@ -141,6 +142,8 @@ export default function Navbar() {
 				{/* Mobile Toggle */}
 				<button
 					aria-label="Toggle menu"
+					aria-expanded={isMobileMenuOpen}
+					aria-controls="mobile-menu"
 					className="md:hidden flex items-center justify-center relative z-[60] text-primary p-2"
 					onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
 				>
@@ -152,6 +155,7 @@ export default function Navbar() {
 			<AnimatePresence>
 				{isMobileMenuOpen && (
 					<motion.div
+						id="mobile-menu"
 						initial={{ opacity: 0, y: -20 }}
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -20 }}
