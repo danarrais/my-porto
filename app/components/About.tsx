@@ -79,8 +79,8 @@ export default function About() {
               <PixelTransition
                 firstContent={
                   <img
-                    src="https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto/v1786257457/profile_about_cy8exo.webp"
-                    alt="Danar Rais Alhakim in batik formal attire"
+                    src="/profile.webp"
+                    alt="Danar Rais Alhakim"
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 }

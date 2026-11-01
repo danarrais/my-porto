@@ -107,8 +107,8 @@ export default function Hero() {
             <PixelTransition
               firstContent={
                 <img
-                  src="https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto,w_600/v1786257592/profile_kslxuv.webp"
-                  alt="Danar Rais Alhakim"
+                  src="https://res.cloudinary.com/oyuxswwy/image/upload/f_auto,q_auto,w_600/v1786257457/profile_about_cy8exo.webp"
+                  alt="Danar Rais Alhakim in batik formal attire"
                   fetchPriority="high"
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
